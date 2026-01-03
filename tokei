@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>デジタル時計</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00ffcc;
+      font-family: "Courier New", monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .clock {
+      text-align: center;
+    }
+
+    #time {
+      font-size: 64px;
+      letter-spacing: 4px;
+    }
+
+    #date {
+      margin-top: 10px;
+      font-size: 20px;
+      color: #aaffee;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock">
+    <div id="time">00:00:00</div>
+    <div id="date">0000年00月00日（曜）</div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+
+      // 時刻（24時間表示）
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('time').textContent =
+        `${hours}:${minutes}:${seconds}`;
+
+      // 日付
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
+      const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+      const weekday = weekdays[now.getDay()];
+
+      document.getElementById('date').textContent =
+        `${year}年${month}月${day}日（${weekday}）`;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
